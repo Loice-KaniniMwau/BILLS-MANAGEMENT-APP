@@ -4,79 +4,153 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilFirstName"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:hint="Enter First Name" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilLastName"
+        android:layout_width="407dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilFirstName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etLastName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Enter Last Name" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEmail"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilLastName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="79dp"
+            android:hint="Enter Email" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPhoneNumber"
+        android:layout_width="404dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilEmail">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Enter PhoneNumber" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPasswordd"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilPhoneNumber">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Password" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btRegister"
-        android:layout_width="206dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="108dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginEnd="202dp"
-        android:text="Register"
+        android:id="@+id/btSignUp"
+        android:layout_width="116dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="284dp"
+        android:text="SignUp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvbillz" />
+        app:layout_constraintTop_toBottomOf="@+id/tilPasswordd" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="397dp"
-        android:layout_height="230dp"
-        android:layout_marginTop="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/baseline_monetization_on_24" />
-
-    <TextView
-        android:id="@+id/tvIntro"
-        android:layout_width="235dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="16dp"
-        android:text="Welcome to "
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
-    <TextView
-        android:id="@+id/tvbillz"
+    <ProgressBar
+        android:id="@+id/pbProgressBar"
+        style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="230dp"
-        android:text="billz"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#CA07EC"
-        android:textSize="60sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
+        android:layout_marginTop="240dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/tilPhoneNumber"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvIntro" />
+        app:layout_constraintTop_toTopOf="@+id/tilFirstName" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="104dp"
-        app:layout_constraintEnd_toStartOf="@+id/tvbillz"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:srcCompat="@drawable/baseline_monetization_on_24" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="57dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="43dp"
+    <Button
+        android:id="@+id/btLoginn"
+        android:layout_width="114dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="93dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="100dp"
+        android:text="Log In"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tvbillz"
-        app:layout_constraintTop_toBottomOf="@+id/tvIntro"
-        app:srcCompat="@drawable/baseline_monetization_on_24" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/btSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/tilPasswordd" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPasswordConf"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tilPasswordd">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPasswordConf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Confirm Password" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

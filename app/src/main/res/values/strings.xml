@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">ASSESSMENT3</string>
+    <string name="password_is_required">Password is required</string>
+    <string name="username_is_required">"Username is required "</string>
+    <string name="password_does_not_match">password does not match</string>
+    <string name="last_name_is_required">last name is required</string>
+    <string name="phone_number_is_required">phone number is required</string>
+    <string name="email_is_required">Email is required</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="summary">Summary</string>
+    <string name="upcoming">upcoming</string>
+    <string name="paid">paid</string>
+    <string name="settings">settings</string>
 </resources>
