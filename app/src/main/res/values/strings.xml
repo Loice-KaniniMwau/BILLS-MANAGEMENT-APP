@@ -12,4 +12,10 @@
     <string name="upcoming">upcoming</string>
     <string name="paid">paid</string>
     <string name="settings">settings</string>
+    <string-array name="frequencies">
+        <item>Weekly</item>
+        <item>Monthly</item>
+        <item>Quarterly</item>
+        <item>Annually</item>
+    </string-array>
 </resources>
