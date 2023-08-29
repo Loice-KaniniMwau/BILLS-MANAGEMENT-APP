@@ -12,6 +12,9 @@
     <string name="upcoming">upcoming</string>
     <string name="paid">paid</string>
     <string name="settings">settings</string>
+    <string name="name">Name</string>
+    <string name="amount">Amount</string>
+    <string name="frequency">Frequency</string>
     <string-array name="frequencies">
         <item>Weekly</item>
         <item>Monthly</item>

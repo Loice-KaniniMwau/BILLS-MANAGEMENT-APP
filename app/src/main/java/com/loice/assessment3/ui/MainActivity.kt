@@ -21,19 +21,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        redirectUser()
+
     }
 
     override fun onResume() {
         super.onResume()
-        binding.btLoginn.setOnClickListener {
-            val intent=Intent(this,LogIn::class.java)
-            startActivity(intent)
-            finish()
-        }
         binding.btSignUp.setOnClickListener {
             registrationErrors()
         }
+
+
 
         userViewModel.errLiveData.observe(this, Observer {
             err->Toast.makeText(this,err,Toast.LENGTH_LONG).show()
@@ -45,6 +42,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, LogIn::class.java))
 
         })
+        binding.btLoginn.setOnClickListener {
+            val intent=Intent(this,LogIn::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
     }
@@ -106,21 +108,6 @@ class MainActivity : AppCompatActivity() {
 
     }
     //launcher activity
-    fun redirectUser(){
-        val sharedPrefs=getSharedPreferences(Constants.PREFS,Context.MODE_PRIVATE)
-        val userId=sharedPrefs.getString(Constants.user_id,Constants.empty_string)
-        if(userId.isNullOrBlank()){
-            startActivity(Intent(this,LogIn::class.java))
 
-        }
-        else{
-            startActivity(Intent(this, HomeActivity::class.java))
-
-        }
-        finish()
-//        val acessToken=sharedPrefs.getString(Constants.access_token,Constants.empty_string)
-
-
-    }
 
 }

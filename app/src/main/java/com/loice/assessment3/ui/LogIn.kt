@@ -30,9 +30,7 @@ class LogIn : AppCompatActivity() {
         binding.btLogin.setOnClickListener {
             loginErrors()
         }
-        binding.btSignUpp.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-        }
+
 
         userViewModel.errLiveData.observe(this, Observer {
                 err->Toast.makeText(this,err,Toast.LENGTH_LONG).show()
@@ -46,6 +44,10 @@ class LogIn : AppCompatActivity() {
             finish()
 
         })
+        binding.btSignUpp.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
 
 
 

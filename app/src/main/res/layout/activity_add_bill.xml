@@ -41,6 +41,9 @@
       android:ems="10"
       android:hint="Bill"
       android:inputType="text"
+
+      android:textColor="@color/white"
+      android:textStyle="bold|italic"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -97,12 +100,20 @@
 
   <Spinner
       android:id="@+id/spDueDate"
-      android:layout_width="318dp"
-      android:layout_height="48dp"
+      android:layout_width="279dp"
+      android:layout_height="50dp"
       android:layout_marginEnd="1dp"
       app:layout_constraintBottom_toBottomOf="@+id/tvDueDate"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintTop_toTopOf="@+id/tvDueDate" />
+  <DatePicker
+      android:id="@+id/dpDueDateAnnual"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="48dp"
+      android:layout_marginTop="38dp"
+      android:visibility="gone"
+      tools:ignore="MissingConstraints" />
 
   <Button
       android:id="@+id/btnSaveBill"
@@ -117,4 +128,12 @@
       app:layout_constraintTop_toBottomOf="@+id/spDueDate" />
 
 
+  <FrameLayout
+      android:id="@+id/fragment_container"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@id/btnSaveBill"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
