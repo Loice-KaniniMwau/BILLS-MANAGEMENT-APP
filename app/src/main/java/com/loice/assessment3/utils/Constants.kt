@@ -6,5 +6,8 @@ class Constants {
         val user_id="USER_ID"
         val access_token="ACCESS_TOKEN"
         val empty_string=""
+        val WEEKLY="Weekly"
+        val MONTHLY="monthly"
+        val ANNUAL="Annually"
     }
 }

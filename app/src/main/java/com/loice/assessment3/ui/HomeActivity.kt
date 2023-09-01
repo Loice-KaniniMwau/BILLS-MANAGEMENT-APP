@@ -20,9 +20,12 @@ class HomeActivity : AppCompatActivity() {
 
     fun setUpBottomNav(){
         binding.bnvHome.setOnItemSelectedListener {
-            menuitem->when(menuitem.itemId){
+            menuItem->when(menuItem.itemId){
                 R.id.summary->{
-                    supportFragmentManager.beginTransaction().replace(R.id.fcvHome,SummaryFragment()).commit()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.fcvHome,SummaryFragment())
+                        .commit()
                     true
                 }
             R.id.upcoming->{

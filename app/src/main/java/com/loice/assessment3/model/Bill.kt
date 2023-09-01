@@ -1,8 +1,8 @@
 package com.loice.assessment3.model
 
+import android.text.Editable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.time.temporal.TemporalAmount
 
 @Entity(tableName = "Bills")
 
@@ -16,4 +16,4 @@ data class Bill(
 
 
 
-)
+    )

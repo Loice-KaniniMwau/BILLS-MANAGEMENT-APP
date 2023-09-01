@@ -21,13 +21,13 @@ class SummaryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         billsViewModel = ViewModelProvider(requireActivity()).get(BillsViewModel::class.java)
         adapter = BillAdapter(requireContext(), R.layout.item_bill, mutableListOf())
-        binding?.billListView?.adapter = adapter
+        binding?.listViewBills?.adapter = adapter
         billsViewModel.getAllBills().observe(viewLifecycleOwner, Observer { bills ->
             adapter.clear()
             adapter.addAll(bills)
             adapter.notifyDataSetChanged()
         })
-        binding?.addBillButton?.setOnClickListener {
+        binding?.fabAddBill?.setOnClickListener {
             startActivity(Intent(requireContext(), AddBillActivity::class.java))
         }
     }
@@ -40,7 +40,7 @@ class SummaryFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
-        binding?.addBillButton?.setOnClickListener {
+        binding?.fabAddBill?.setOnClickListener {
             startActivity(Intent(requireContext(), AddBillActivity::class.java))
         }
     }

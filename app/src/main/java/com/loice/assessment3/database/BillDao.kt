@@ -13,13 +13,11 @@ interface BillDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveBill(bill:Bill)
 
-    @Query("SELECT * FROM bills ORDER BY name")
+    @Query("SELECT * FROM Bills")
     fun getAllBills(): LiveData<List<Bill>>
 
-    @Query("SELECT * FROM Bills WHERE  billId=:billId")
-    fun getBillById(billId:Int):LiveData<Bill>
-//    @Delete
-//    suspend fun deleteBillById(bill: Bill)
+
+
 }
 
 
