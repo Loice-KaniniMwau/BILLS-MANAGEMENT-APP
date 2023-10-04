@@ -2,6 +2,7 @@ package com.loice.assessment3.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.assessment.ui.PaidBillsFragment
 import com.loice.assessment3.R
 import com.loice.assessment3.databinding.ActivityHomeBinding
 
@@ -11,11 +12,13 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding=ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
     }
 
     override fun onResume() {
         super.onResume()
         setUpBottomNav()
+
     }
 
     fun setUpBottomNav(){
@@ -36,7 +39,7 @@ class HomeActivity : AppCompatActivity() {
             }
             R.id.paid->{
                 supportFragmentManager.beginTransaction()
-                    .replace(R.id.fcvHome,PaidBillsFragment())
+                    .replace(R.id.fcvHome, PaidBillsFragment())
                     .commit()
                 true
 

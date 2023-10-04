@@ -1,7 +1,9 @@
 package com.loice.assessment3.model
 
+import com.google.gson.annotations.Expose
+
 data class RegisterResponse(
-var message:String,
-var user:User
+@Expose var message:String,
+@Expose var user:User
 
 )

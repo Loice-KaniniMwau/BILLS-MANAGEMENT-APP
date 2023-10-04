@@ -28,11 +28,11 @@
             android:name=".ui.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.LogIn"
+            android:name=".ui.SplashActivity"
             android:exported="false" />
 
             <activity
-                android:name=".ui.SplashActivity"
+                android:name=".ui.LogIn"
                 android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

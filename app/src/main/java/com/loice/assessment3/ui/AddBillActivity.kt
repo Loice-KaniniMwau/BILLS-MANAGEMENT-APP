@@ -12,33 +12,37 @@ import com.loice.assessment3.R
 import com.loice.assessment3.databinding.ActivityAddBillBinding
 import com.loice.assessment3.model.Bill
 import com.loice.assessment3.utils.Constants
+import com.loice.assessment3.utils.dateTimeUtils
 
 import com.loice.assessment3.viewmodel.BillsViewModel
 import java.util.Calendar
 import java.util.UUID
+
+
 class AddBillActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityAddBillBinding
-    private val billsViewModel: BillsViewModel by viewModels()
-    var selectedDate=0
-    var selectedMonth=0
+    lateinit var binding: ActivityAddBillBinding
+  private  val billsViewModel: BillsViewModel by viewModels()
+   private var selectedDate = 0
+   private var selectedMonth = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddBillBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
     }
 
     override fun onResume() {
         super.onResume()
         setupFreqSpinner()
         binding.btnSaveBill.setOnClickListener {
-            validateDill()
+            validateBill()
         }
     }
-    private fun setupFreqSpinner() {
-        val frequencies= arrayOf(Constants.WEEKLY,Constants.MONTHLY,Constants.ANNUAL)
-        val freqAdapter = ArrayAdapter(this,  android.R.layout.simple_spinner_item,frequencies)
+
+    fun setupFreqSpinner() {
+        val frequencies =
+            arrayOf(Constants.WEEKLY, Constants.MONTHLY, Constants.ANNUAL)
+        val freqAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, frequencies)
         freqAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spfrequency.adapter = freqAdapter
         binding.spfrequency.onItemSelectedListener = object : OnItemSelectedListener {
@@ -51,14 +55,18 @@ class AddBillActivity : AppCompatActivity() {
                 when (binding.spfrequency.selectedItem.toString()) {
                     Constants.WEEKLY -> {
                         showSpinner()
-                       setupDueDateSpinner(Array(7) { it + 1 })
+                        setUpDueDateSpinner(Array(7) { it + 1 })
                     }
 
                     Constants.MONTHLY -> {
                         showSpinner()
-                        setupDueDateSpinner(Array(31) { it + 1 })
+                        setUpDueDateSpinner(Array(31) { it + 1 })
                     }
-
+//
+//                    Constants.QUARTERLY -> {
+//                        showSpinner()
+//                        setUpDueDateSpinner(Array(90) { it + 1 })
+//                    }
 
                     Constants.ANNUAL -> {
                         showDatePicker()
@@ -70,82 +78,85 @@ class AddBillActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
-
     }
 
-    fun showSpinner(){
+    fun showSpinner() {
         binding.dpDueDateAnnual.hide()
         binding.spduedate.show()
     }
-    fun showDatePicker(){
+
+    fun showDatePicker() {
         binding.dpDueDateAnnual.show()
         binding.spduedate.hide()
     }
-    private fun setupDueDateSpinner(dates:Array<Int>) {
-        val duedateAdapter=ArrayAdapter(this,android.R.layout.simple_spinner_item,dates)
-        duedateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spduedate.adapter=duedateAdapter
 
-
-
+    fun setUpDueDateSpinner(dates: Array<Int>) {
+        val dueDateAdapter =
+            ArrayAdapter(this, android.R.layout.simple_spinner_item, dates)
+        dueDateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spduedate.adapter = dueDateAdapter
     }
-    fun setupDpDueDate(){
-        val cal=Calendar.getInstance()
-        binding.dpDueDateAnnual.init(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH)){
-            view,year,month,date->
-            selectedDate=date
-            selectedMonth=month+1
+
+    fun setupDpDueDate() {
+        val cal = Calendar.getInstance()
+        binding.dpDueDateAnnual.init(
+            cal.get(Calendar.YEAR),
+            cal.get(Calendar.MONTH),
+            cal.get(Calendar.DAY_OF_MONTH)
+        ) { _, _, month, date ->
+            selectedDate = date
+            selectedMonth = month + 1
         }
     }
 
-    fun validateDill(){
-        val name=binding.etName.text.toString()
-        val amount=binding.etName.text.toString()
-        val frequency=binding.spfrequency.selectedItem.toString()
-        var dueDate=Constants.empty_string
-       if(frequency==Constants.ANNUAL) {
-           dueDate="$selectedDate/$selectedMonth"
-       }
-        else{
+    fun validateBill() {
+        val name = binding.etName.text.toString()
+        val amount = binding.etAmount.text.toString()
+        val frequency = binding.spfrequency.selectedItem.toString()
+        val dueDate = if (frequency == Constants.ANNUAL) {
+           dateTimeUtils
+               .createDateFromDayAndMonth(selectedDate,selectedMonth)
+               .substring(5)
+
+
+        } else {
             binding.spduedate.selectedItem.toString()
         }
-        var error=false
-        if(name.isBlank()){
-            error=true
-            binding.etName.error="please enter the bill name"
+        var error = false
+        if (name.isBlank()) {
+            error = true
+            binding.etName.error = "name is required"
         }
-        if(amount.isBlank()){
-            error=true
-            binding.etAmount.error="please enter the amount"
+        if (amount.isBlank()) {
+            error = true
+            binding.etName.error = "amount is required"
         }
-        if(!error){
-            val prefs=getSharedPreferences(Constants.PREFS,Context.MODE_PRIVATE)
-            val userId=prefs.getString(Constants.user_id,Constants.empty_string)
-            val newBill=Bill(
-               name = name,
-                frequency = frequency,
+        if (!error) {
+            val prefs = getSharedPreferences(Constants.PREFS, Context.MODE_PRIVATE)
+            val userId = prefs.getString(Constants.user_id, Constants.empty_string)
+            val newBill = Bill(
+                name = name,
                 amount = amount.toDouble(),
+                frequency = frequency,
                 dueDate = dueDate,
                 billId = UUID.randomUUID().toString(),
-                userId = userId.toString()
-
-
-
+                userId = userId.toString(),
+                synced = false
             )
             billsViewModel.saveBill(newBill)
+
             clearForm()
             finish()
             navigateToSummaryFragment()
         }
     }
 
-    fun clearForm(){
+    fun clearForm() {
         binding.etName.setText(Constants.empty_string)
         binding.etAmount.setText(Constants.empty_string)
         binding.spfrequency.setSelection(0)
         showSpinner()
         binding.spduedate.setSelection(0)
-
     }
 
     private fun navigateToSummaryFragment() {
@@ -155,20 +166,13 @@ class AddBillActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commit()
     }
-
 }
 
-fun View.show(){
-    this.visibility=View.VISIBLE
-}
-fun View.hide(){
-    this.visibility=View.GONE
+fun View.show() {
+    this.visibility = View.VISIBLE
 }
 
-
-
-
-
-
-
+fun View.hide() {
+    this.visibility = View.GONE
+}
 

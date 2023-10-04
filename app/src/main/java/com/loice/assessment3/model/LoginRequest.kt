@@ -1,10 +1,11 @@
 package com.loice.assessment3.model
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class LoginRequest(
-    @SerializedName("email") var email:String,
-    @SerializedName("password") var password:String
+  @Expose  @SerializedName("email") var email:String,
+   @Expose @SerializedName("password") var password:String
 )
 
 

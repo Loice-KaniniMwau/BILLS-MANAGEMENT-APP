@@ -16,5 +16,4 @@ class UserRepository {
         }
     }
 
-//    val apiClient2=ApiClient
 }
