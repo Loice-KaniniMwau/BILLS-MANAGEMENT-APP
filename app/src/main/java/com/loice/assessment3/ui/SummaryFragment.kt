@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.loice.assessment3.R
 import com.loice.assessment3.databinding.FragmentSummaryBinding
+import com.loice.assessment3.utils.Utils
 import com.loice.assessment3.viewmodel.BillsViewModel
 
 
@@ -19,14 +20,8 @@ class SummaryFragment : Fragment() {
     private lateinit var adapter: BillAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        billsViewModel = ViewModelProvider(requireActivity()).get(BillsViewModel::class.java)
-        adapter = BillAdapter(requireContext(), R.layout.item_bill, mutableListOf())
-        binding?.listViewBills?.adapter = adapter
-        billsViewModel.getAllBills().observe(viewLifecycleOwner, Observer { bills ->
-            adapter.clear()
-            adapter.addAll(bills)
-            adapter.notifyDataSetChanged()
-        })
+
+
         binding?.fabAddBill?.setOnClickListener {
             startActivity(Intent(requireContext(), AddBillActivity::class.java))
         }
@@ -42,6 +37,18 @@ class SummaryFragment : Fragment() {
         super.onResume()
         binding?.fabAddBill?.setOnClickListener {
             startActivity(Intent(requireContext(), AddBillActivity::class.java))
+        }
+        billsViewModel.getMonthlySummary()
+        showMonthlySummary()
+    }
+
+    fun showMonthlySummary(){
+        billsViewModel.summaryLiveData.observe(this){
+            summary->binding?.tvPaidAmt?.text= Utils.formatCurrency(summary.paid)
+            binding?.tvPendingAmt?.text= Utils.formatCurrency(summary.upcoming)
+            binding?.tvTotalAmt?.text=Utils.formatCurrency(summary.total)
+            binding?.tvOverdueAmt?.text=Utils.formatCurrency(summary.overdue)
+
         }
     }
     override fun onDestroyView() {

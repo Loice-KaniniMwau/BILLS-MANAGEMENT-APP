@@ -1,12 +1,14 @@
 package com.loice.assessment3.repository
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.loice.assessment3.BillsApp
 import com.loice.assessment3.api.ApiClient
 import com.loice.assessment3.api.ApiInterface
 import com.loice.assessment3.database.BillDB
 
 import com.loice.assessment3.model.Bill
+import com.loice.assessment3.model.BillsSummary
 import com.loice.assessment3.model.UpcomingBill
 import com.loice.assessment3.utils.Constants
 import com.loice.assessment3.utils.dateTimeUtils
@@ -205,6 +207,23 @@ class BillsRepository {
         }
     }
 
+//    summary frgment
+    suspend fun getMonthlySummary():LiveData<BillsSummary>{
+      return withContext(Dispatchers.IO){
+            val startDate=dateTimeUtils.getFirstDayOfMonth()
+            val endDate=dateTimeUtils.getLastDayOfMonth()
+            val today=dateTimeUtils.getDateToday()
+            val paid=upcomingBillsDao.getPaidMonthlyBillsSum(startDate,endDate)
+            val upcoming=upcomingBillsDao.getUpcomingBillsThisMonth(startDate,endDate, today)
+            val total=upcomingBillsDao.getTotalMonthlyBills(startDate, endDate)
+            val overdue=upcomingBillsDao.getOverDueBillsThisMonth(startDate, endDate, today)
+            val summary=BillsSummary(paid=paid,overdue=overdue, upcoming = upcoming, total = total)
+          MutableLiveData(summary)
+
+
+
+        }
+    }
 
 
 

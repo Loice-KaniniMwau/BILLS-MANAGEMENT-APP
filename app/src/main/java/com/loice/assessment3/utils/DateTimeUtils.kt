@@ -71,5 +71,10 @@ class dateTimeUtils {
             return readableFormat.format(dateToFormat)
         }
 
+        fun getDateToday():String{
+            return formatDate(LocalDateTime.now())
+
+        }
+
     }
 }
